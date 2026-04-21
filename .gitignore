@@ -1,2 +1,4 @@
 data
 inst/compare_formats.R
+.RData
+.Rhistory
