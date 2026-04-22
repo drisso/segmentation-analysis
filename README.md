@@ -1,4 +1,6 @@
-# segmentation-analysis
+# Image and segmentation data manipulation and visualization
+
+Authors: Mike Smith [@grimbough], Riccardo Ceccaroni [@riccardoc95], Carissa Chen [@carissaynchen], Davide Risso [@drisso]
 
 ## Goals
 
@@ -48,14 +50,13 @@ Starting from the nuclear segmentation in geojson and parquet:
 - We are able to crop a small region and plot the cropped image.
 - We learned that we can use terra to easily work with huge images with lazy loading. This can be extended to working with zarr files with ZarrArray.
 
+![](img/overlay.png)
+
 ### Mid-life crisis
 
 Are we just re-inventing `terra`?
 
 Appropriate... as today is Earth day (thanks Ilaria!).
-
-![](https://en.wikipedia.org/wiki/Earth_Day#/media/File:Earth_Day_Flag.png)
-
 
 ## Implementation
 
@@ -72,9 +73,11 @@ Appropriate... as today is Earth day (thanks Ilaria!).
 - We have an R function that efficiently retrieves a set of polygons that align with the chunk from the parquet file (out of memory)
 - Proof-of-principle implementation of the whole approach, which sidesteps the border polygons by dropping them
 
-### Bottlenecks
+### Issues
 
 The main issue is border effects: what happens if polygons are only partially in the window?
+
+![](img/border_effect_schematic.png)
 
 We have thought of three possible strategies, in order of simplicity:
 
